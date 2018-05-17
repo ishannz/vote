@@ -1,4 +1,12 @@
 <?php
+namespace Vote\Extensions;
+
+use SilverStripe\Comments\Model\Comment;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
+use Vote\Models\Vote;
 
 class VoteControllerExtension extends DataExtension
 {
@@ -14,6 +22,7 @@ class VoteControllerExtension extends DataExtension
      * for the specified vote object.
      *
      * @return string
+     * @throws \SilverStripe\ORM\ValidationException
      */
     public function vote()
     {
@@ -71,10 +80,11 @@ class VoteControllerExtension extends DataExtension
      * @param integer $commentID
      *
      * @return string|null
+     * @throws \SilverStripe\ORM\ValidationException
      */
     protected function voteByCurrentUser($status, $commentID)
     {
-        return $this->voteBy(Member::currentUser(), $status, $commentID);
+        return $this->voteBy(Security::getCurrentUser(), $status, $commentID);
     }
 
     /**
@@ -85,6 +95,7 @@ class VoteControllerExtension extends DataExtension
      * @param integer $commentID
      *
      * @return string|null
+     * @throws \SilverStripe\ORM\ValidationException
      */
     private function voteBy($member = null, $status, $commentID)
     {
@@ -171,6 +182,6 @@ class VoteControllerExtension extends DataExtension
      */
     public function VoteStatusByCurrentUser()
     {
-        return $this->owner->VoteStatus(Member::currentUser());
+        return $this->owner->VoteStatus(Security::getCurrentUser());
     }
 }

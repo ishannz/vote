@@ -1,21 +1,24 @@
 <?php
 
+namespace Vote\Models;
+
+use SilverStripe\ORM\DataObject;
+
 class Vote extends DataObject
 {
-
     /**
      * @var array
      */
     private static $db = [
-        'Status' => 'enum(array("Like", "Dislike"))'
+        'Status' => 'enum(array("Like", "Dislike"))',
     ];
 
     /**
      * @var array
      */
     private static $has_one = [
-        'Page' => 'Page',
+        'Page'    => 'Page',
         'Comment' => 'Comment', // can vote on a Page OR a Comment
-        'Member' => 'Member'
+        'Member'  => 'Member',
     ];
 }
