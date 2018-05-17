@@ -1,6 +1,6 @@
 <?php
 
-namespace Vote\Extensions;
+namespace NZTA\Vote\Extensions;
 
 use SilverStripe\ORM\DataExtension;
 

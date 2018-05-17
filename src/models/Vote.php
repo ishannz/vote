@@ -1,6 +1,6 @@
 <?php
 
-namespace Vote\Models;
+namespace NZTA\Vote\Models;
 
 use SilverStripe\ORM\DataObject;
 

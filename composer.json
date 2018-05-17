@@ -13,8 +13,6 @@
   "support": {
     "issues": "https://github.com/NZTA/vote/issues"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
     "silverstripe/cms": "^4.0",
     "silverstripe/framework": "^4.0",
@@ -29,5 +27,13 @@
     "expose": [
       "js"
     ]
-  }
+  },
+  "autoload": {
+    "psr-4": {
+      "NZTA\\Vote\\": "src/",
+      "NZTA\\Vote\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
