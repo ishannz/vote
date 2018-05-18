@@ -7,6 +7,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 use NZTA\Vote\Models\Vote;
+use SilverStripe\Control\Director;
 
 class VoteControllerExtension extends DataExtension
 {
@@ -49,7 +50,7 @@ class VoteControllerExtension extends DataExtension
         }
 
         // Get all votes to count the amount of likes and dislikes for this object
-        $votes = $this->owner->Votes();
+        $votes = $this->owner->data()->Votes();
         $filter = ['CommentID' => $commentID];
 
         $numLikes = $votes->filter(array_merge(
@@ -127,8 +128,7 @@ class VoteControllerExtension extends DataExtension
         }
 
         // check whether the member has already voted
-        $vote = $this
-            ->owner
+        $vote = $this->owner->data()
             ->Votes()
             ->filter([
                 'MemberID' => $member->ID,
@@ -144,7 +144,7 @@ class VoteControllerExtension extends DataExtension
             ]);
             $vote->write();
 
-            $this->owner->Votes()->add($vote);
+            $this->owner->data()->Votes()->add($vote);
         }
 
         $vote->Status = $status;
@@ -166,8 +166,7 @@ class VoteControllerExtension extends DataExtension
             return null;
         }
 
-        $vote = $this
-            ->owner
+        $vote = $this->owner->data()
             ->Votes()
             ->filter('MemberID', $member->ID)
             ->first();

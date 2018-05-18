@@ -10,7 +10,7 @@ class VoteExtension extends DataExtension
      * @var array
      */
     private static $has_many = [
-        'Votes' => 'Vote',
+        'Votes' => Vote::class,
     ];
 
     /**

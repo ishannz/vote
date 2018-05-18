@@ -2,10 +2,28 @@
 
 namespace NZTA\Vote\Models;
 
+use SilverStripe\Comments\Model\Comment;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
+use Page;
 
 class Vote extends DataObject
 {
+    /**
+     * @var string
+     */
+    private static $table_name = 'Vote';
+
+    /**
+     * @var string
+     */
+    private static $singular_name = 'Vote';
+
+    /**
+     * @var string
+     */
+    private static $plural_name = 'Votes';
+
     /**
      * @var array
      */
@@ -17,8 +35,8 @@ class Vote extends DataObject
      * @var array
      */
     private static $has_one = [
-        'Page'    => 'Page',
-        'Comment' => 'Comment', // can vote on a Page OR a Comment
-        'Member'  => 'Member',
+        'Page'    => Page::class,
+        'Comment' => Comment::class , // can vote on a Page OR a Comment
+        'Member'  => Member::class,
     ];
 }
